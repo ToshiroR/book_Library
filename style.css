@@ -58,8 +58,19 @@ button:hover {
   border: 2px solid black;
   box-shadow: 0px 1px 17px -6px rgba(0,0,0,0.75);
 }
-.container {
-  
-  
-  
+
+.added-book {
+  display: flex;
+  gap: 5px;
+  justify-content: center;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.book-card {
+  width: 300px;
+  height: 300px;
+  border: 2px black solid;
+  padding: 10px;
+  box-shadow: 0px 1px 17px -6px rgba(0, 0, 0, 0.75);
 }
