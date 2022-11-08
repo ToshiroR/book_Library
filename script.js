@@ -39,9 +39,9 @@ function addBookToLibrary() {
   newBook = new Book(title, author, pages);
 
   myLibrary.push(newBook);
-  addedToBookList(myLibrary, addedBooks);
+  addedToBookList(myLibrary);
   
-  console.table(myLibrary);
+  
 
 };
 
@@ -58,13 +58,13 @@ function addedToBookList() {
                       <p>${myLibrary[i].author}</p>
                       <p>${myLibrary[i].pages}</p>
                       <p>${myLibrary[i].info()}</p>
-                      <button onclick="removeBtn()">Remove</button>
+                      <button onclick="removeBtn(event)" data-index=${i}>Remove</button>
                     </div>
                   </div>`
        
     const div = document.createElement("div");
     div.innerHTML = card;
-    addedBooks.appendChild(div.firstChild)
+    addedBooks.appendChild(div.firstChild);
 
   };
 
@@ -73,15 +73,14 @@ function addedToBookList() {
 
 //      Test book for the basic constructor
 
-myLibrary.push(new Book("Lord Of The Hoes", "Jhonny Sins", 420, "read it"));
+
 
 
 //      Event listener for Submiting Form
 
 const submit = document.getElementById("submit");
 
-submit.addEventListener("click", (event) => {
-
+submit.addEventListener("click", (event) => { 
   event.preventDefault();
   addBookToLibrary();
   
@@ -92,15 +91,22 @@ submit.addEventListener("click", (event) => {
 
 const remove = document.getElementById("remove");
 
-function removeBtn() {
+function removeBtn(event) {
   const bookCard = document.querySelector(".book-card");
+  const arrNumber = event.target.getAttribute("data-index");
   bookCard.remove();
+  myLibrary.splice(arrNumber, 1)
+  console.table(myLibrary);
 
+  console.log(arrNumber)
   
 };
 
 
+myLibrary.push(new Book("Lord Of The Hoes", "Jhonny Sins", 420, "read it"));
+myLibrary.push(new Book("Smooth Criminal", "little Michael ", 423, "Read it"));
+myLibrary.push(new Book("Two Piece", "Noel Miller", 1500, "Not Read"));
 
+addBookToLibrary()
 
-
-
+console.table(myLibrary)
