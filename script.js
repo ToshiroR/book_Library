@@ -17,7 +17,7 @@ let newBook = '';
 
 
 
-//      Constructor for organizing the Books
+//      Constructor for organizing the New Books
 
 function Book(title, author, pages, read) {
   this.title = title
@@ -52,13 +52,13 @@ function addedToBookList() {
   addedBooks.innerHTML = "";
 
   for (i = 0; i < myLibrary.length; i++) {
-    const card = `<div class="book-card" data-index=${i}>
+    const card = `<div class="book-card" >
                     <div class="card">
                       <h2>${myLibrary[i].title}</h2>
                       <p>${myLibrary[i].author}</p>
                       <p>${myLibrary[i].pages}</p>
                       <p>${myLibrary[i].info()}</p>
-                      <button onclick="removeBtn(event)" data-index=${i}>Remove</button>
+                      <button onclick="removeBtn(event)" data-index="${myLibrary[i].title}">Remove</button>
                     </div>
                   </div>`
        
@@ -69,10 +69,6 @@ function addedToBookList() {
   };
 
 };
-
-
-//      Test book for the basic constructor
-
 
 
 
@@ -93,17 +89,21 @@ const remove = document.getElementById("remove");
 
 function removeBtn(event) {
   const bookCard = document.querySelector(".book-card");
-  const arrNumber = event.target.getAttribute("data-index");
-  bookCard.remove();
-  myLibrary.splice(arrNumber, 1)
-  console.table(myLibrary);
+  const arrIndex = event.target.getAttribute("data-index");
 
-  console.log(arrNumber)
-  
+  for (i=0; i < myLibrary.length; i++) {
+
+    if(myLibrary[i].title == arrIndex) {
+      bookCard.remove();
+      myLibrary.splice(myLibrary[i], 1)
+    }
+  }
 };
 
 
-myLibrary.push(new Book("Lord Of The Hoes", "Jhonny Sins", 420, "read it"));
+//      Test books for the basic constructor
+
+myLibrary.push(new Book("Lord Of The Hoes", "Jhonny Sins", 420, "Read it"));
 myLibrary.push(new Book("Smooth Criminal", "little Michael ", 423, "Read it"));
 myLibrary.push(new Book("Two Piece", "Noel Miller", 1500, "Not Read"));
 
