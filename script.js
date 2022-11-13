@@ -20,13 +20,11 @@ let newBook = '';
 //      Constructor for organizing the New Books
 
 function Book(title, author, pages, read) {
-  this.title = title
-  this.author = author
-  this.pages = pages
-  this.read = read
-  this.info = function() {
-    return `${this.title} is a book by ${this.author}, ${this.pages} pages, not read yet.`
-  }
+  this.title = title;
+  this.author = author;
+  this.pages = pages;
+  this.read = read;
+  
 };
 
 
@@ -36,7 +34,8 @@ function addBookToLibrary() {
   const title = document.getElementById("title").value;
   const author = document.getElementById("author").value;
   const pages = document.getElementById("pages").value;
-  newBook = new Book(title, author, pages);
+  const read = document.getElementById("read").value;
+  newBook = new Book(title, author, pages, read);
 
   myLibrary.push(newBook);
   addedToBookList(myLibrary);
@@ -57,7 +56,7 @@ function addedToBookList() {
                       <h2>${myLibrary[i].title}</h2>
                       <p>${myLibrary[i].author}</p>
                       <p>${myLibrary[i].pages}</p>
-                      <p>${myLibrary[i].info()}</p>
+                      <button onclick="readBtn()" id="read-btn"value ="">${myLibrary[i].read}</button>
                       <button onclick="removeBtn(event)" data-index="${myLibrary[i].title}">Remove</button>
                     </div>
                   </div>`
@@ -99,6 +98,21 @@ function removeBtn(event) {
     }
   }
 };
+
+
+
+
+//      Button for changing read Status
+
+
+
+function readBtn(event) {
+  const readStBtn = document.getElementById("read-btn");
+
+  if (readStBtn.value == ) {}
+
+
+}
 
 
 //      Test books for the basic constructor
