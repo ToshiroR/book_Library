@@ -28,6 +28,14 @@ function Book(title, author, pages, read) {
 };
 
 
+//      Test books for the basic constructor
+
+myLibrary.push(new Book("Lord Of The Hoes", "Jhonny Sins", 420, "read"));
+myLibrary.push(new Book("Smooth Criminal", "little Michael ", 423, "read"));
+myLibrary.push(new Book("Two Piece", "Noel Miller", 1500, "unread"));
+
+addBookToLibrary()
+
 //      function that adds form data to myLibrary
 
 function addBookToLibrary() {
@@ -51,12 +59,12 @@ function addedToBookList() {
   addedBooks.innerHTML = "";
 
   for (i = 0; i < myLibrary.length; i++) {
-    const card = `<div class="book-card" >
+    const card = `<div class="book-card" data-index="${myLibrary[i].title}">
                     <div class="card">
                       <h2>${myLibrary[i].title}</h2>
                       <p>${myLibrary[i].author}</p>
                       <p>${myLibrary[i].pages}</p>
-                      <button onclick="readBtn(event)" id="read-btn" data-read="${myLibrary[i].title}">${myLibrary[i].read}</button>
+                      <button id="readBtn" onclick="readBtn(event)">${myLibrary[i].read}</button>
                       <button onclick="removeBtn(event)" data-index="${myLibrary[i].title}">Remove</button>
                     </div>
                   </div>`
@@ -89,12 +97,19 @@ const remove = document.getElementById("remove");
 function removeBtn(event) {
   const bookCard = document.querySelector(".book-card");
   const arrIndex = event.target.getAttribute("data-index");
+  const bookIndex = bookCard.getAttribute("data-index");
 
-  for (i=0; i < myLibrary.length; i++) {
+  console.log(arrIndex)
 
-    if(myLibrary[i].title == arrIndex) {
-      bookCard.remove();
+  for (i = 0; i < myLibrary.length; i++) {
+
+    if (myLibrary[i].title == arrIndex && bookIndex == myLibrary[i].title){
       myLibrary.splice(myLibrary[i], 1)
+      
+
+      console.table(myLibrary)
+      
+      
     }
   }
 };
@@ -104,30 +119,35 @@ function removeBtn(event) {
 
 //      Button for changing read Status
 
+const unreadBtn = document.getElementById("readBtn");
+
+
 
 
 function readBtn(event) {
-  
-  const unreadBtn = document.getElementById("read-btn");
-  let readStBtn = document.getElementById("read-btn").textContent;
-  const readIndex = event.target.getAttribute("data-read");
-  
 
-  for (i=0; i < myLibrary.length; i++) {
-    if (readStBtn == "read" || myLibrary[i].title == readIndex) {
-      readStBtn = "Unread";
-      unreadBtn.innerText = "Unread"
+    
+    let btnText = event.target.textContent;
+
+    console.log(btnText)
+
+    if (btnText === "read") {
+          
+      btnText = "unread";
       console.log(readIndex)
-      
-  
+        
     } 
-    if (readStBtn == "Unread" || myLibrary[i].title == readIndex) {
-      readStBtn = "read";
-      unreadBtn.innerText = "read";
+      
+    if (btnText === "unread") {
+          
+      btnText.textContent = "read";
       console.log(readIndex)
     }
 
-  }
+    
+
+  };
+
 
  // if (readStBtn == "read" || ) {
  //   readStBtn = "Unread";
@@ -141,16 +161,12 @@ function readBtn(event) {
 //    }
   
 
-}
 
 
 
 
-//      Test books for the basic constructor
 
-myLibrary.push(new Book("Lord Of The Hoes", "Jhonny Sins", 420, "read"));
-myLibrary.push(new Book("Smooth Criminal", "little Michael ", 423, "read "));
-myLibrary.push(new Book("Two Piece", "Noel Miller", 1500, "Unread"));
+
 
 addBookToLibrary()
 
