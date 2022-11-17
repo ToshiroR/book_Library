@@ -2,7 +2,7 @@
 
 const formField = document.querySelector(".form-container");
 const addedBooks = document.querySelector(".added-book");
-const form = document.getElementById("form");
+const form = document.getElementById("myForm");
 const add = document.getElementById("add-btn");
 
 
@@ -88,8 +88,8 @@ const submit = document.getElementById("submit");
 
 submit.addEventListener("click", (event) => { 
   event.preventDefault();
-  this.reset()
   addBookToLibrary();
+  form.reset()
   
   
 });
