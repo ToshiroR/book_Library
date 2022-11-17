@@ -59,6 +59,7 @@ function addedToBookList() {
   addedBooks.innerHTML = "";
 
   for (i = 0; i < myLibrary.length; i++) {
+    if (myLibrary[i].title !== "") {
     const card = `<div class="book-card" data-index="${myLibrary[i].title}">
                     <div class="card">
                       <h2>${myLibrary[i].title}</h2>
@@ -73,6 +74,8 @@ function addedToBookList() {
     div.innerHTML = card;
     addedBooks.appendChild(div.firstChild);
 
+    }
+  
   };
 
 };
@@ -85,7 +88,9 @@ const submit = document.getElementById("submit");
 
 submit.addEventListener("click", (event) => { 
   event.preventDefault();
+  this.reset()
   addBookToLibrary();
+  
   
 });
 
@@ -101,17 +106,11 @@ function removeBtn(event) {
 
   console.log(arrIndex)
 
-  for (i = 0; i < myLibrary.length; i++) {
-
-    if (myLibrary[i].title == arrIndex && bookIndex == myLibrary[i].title){
-      myLibrary.splice(myLibrary[i], 1)
-      
-
-      console.table(myLibrary)
-      
-      
-    }
-  }
+  let newLibrary = myLibrary.filter(book => book.title !== arrIndex && book.title !== "")
+  
+  myLibrary = newLibrary
+  addBookToLibrary()
+  console.table(myLibrary)
 };
 
 
@@ -168,6 +167,6 @@ function readBtn(event) {
 
 
 
-addBookToLibrary()
+
 
 
