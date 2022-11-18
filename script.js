@@ -25,13 +25,13 @@ function Book(title, author, pages, read) {
   this.pages = pages;
   this.read = read;
   
+  
 };
 
 
 //      Test books for the basic constructor
 
 myLibrary.push(new Book("Lord Of The Hoes", "Jhonny Sins", 420, "read"));
-myLibrary.push(new Book("Smooth Criminal", "little Michael ", 423, "read"));
 myLibrary.push(new Book("Two Piece", "Noel Miller", 1500, "unread"));
 
 addBookToLibrary()
@@ -65,7 +65,7 @@ function addedToBookList() {
                       <h2>${myLibrary[i].title}</h2>
                       <p>${myLibrary[i].author}</p>
                       <p>${myLibrary[i].pages}</p>
-                      <button id="readBtn" onclick="readBtn(event)">${myLibrary[i].read}</button>
+                      <button id="readBtn" onclick="readBtn(this.id)">${myLibrary[i].read}</button>
                       <button onclick="removeBtn(event)" data-index="${myLibrary[i].title}">Remove</button>
                     </div>
                   </div>`
@@ -100,17 +100,12 @@ submit.addEventListener("click", (event) => {
 const remove = document.getElementById("remove");
 
 function removeBtn(event) {
-  const bookCard = document.querySelector(".book-card");
+  
   const arrIndex = event.target.getAttribute("data-index");
-  const bookIndex = bookCard.getAttribute("data-index");
-
-  console.log(arrIndex)
-
   let newLibrary = myLibrary.filter(book => book.title !== arrIndex && book.title !== "")
   
   myLibrary = newLibrary
   addBookToLibrary()
-  console.table(myLibrary)
 };
 
 
@@ -123,24 +118,30 @@ const unreadBtn = document.getElementById("readBtn");
 
 
 
-function readBtn(event) {
+function readBtn(readBtn_id) {
+  const pTarget = document.getElementById("readBtn").parentNode.parentElement;
+  const targetIndex = pTarget.getAttribute("data-index");
+
+  console.log(targetIndex)
+  let btnText = document.getElementById(readBtn_id);
+    
 
     
-    let btnText = event.target.textContent;
 
-    console.log(btnText)
-
-    if (btnText === "read") {
+  if (btnText.textContent == "read") {
           
-      btnText = "unread";
-      console.log(readIndex)
+      btnText.textContent = "unread";
+      
+  
         
     } 
       
-    if (btnText === "unread") {
+    else {
           
       btnText.textContent = "read";
-      console.log(readIndex)
+
+      
+      
     }
 
     
