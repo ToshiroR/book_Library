@@ -65,7 +65,7 @@ function addedToBookList() {
                       <h2>${myLibrary[i].title}</h2>
                       <p>${myLibrary[i].author}</p>
                       <p>${myLibrary[i].pages}</p>
-                      <button id="readBtn" onclick="readBtn(this.id)">${myLibrary[i].read}</button>
+                      <button id="readBtn" onclick="readBtn(event)">${myLibrary[i].read}</button>
                       <button onclick="removeBtn(event)" data-index="${myLibrary[i].title}">Remove</button>
                     </div>
                   </div>`
@@ -113,40 +113,40 @@ function removeBtn(event) {
 
 //      Button for changing read Status
 
-const unreadBtn = document.getElementById("readBtn");
 
 
+function readBtn(event) {
+
+  const readIndex = event.target.getAttribute("data-index");
+  console.log(readIndex)
+
+}
 
 
-function readBtn(readBtn_id) {
-  const pTarget = document.getElementById("readBtn").parentNode.parentElement;
+/* function readBtn(readBtn_id) {
+  const pTarget = readBtn_id.target.getElementById("readBtn")
   const targetIndex = pTarget.getAttribute("data-index");
 
-  console.log(targetIndex)
+  
   let btnText = document.getElementById(readBtn_id);
     
 
-    
+  for(i=0; i < myLibrary.length; i++)  {
 
-  if (btnText.textContent == "read") {
-          
+    if (btnText.textContent === "read" && targetIndex === myLibrary[i].title) {    
       btnText.textContent = "unread";
-      
-  
-        
+      console.log(pTarget)
     } 
       
-    else {
-          
+    if (btnText.textContent === "unread" && targetIndex === myLibrary[i].title) {    
       btnText.textContent = "read";
-
-      
-      
+      console.log(pTarget)
+   
     }
-
+  }
     
-
-  };
+*/
+//};
 
 
  // if (readStBtn == "read" || ) {
