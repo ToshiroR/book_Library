@@ -2,7 +2,7 @@
 
 const formField = document.querySelector(".form-container");
 const addedBooks = document.querySelector(".added-book");
-const form = document.getElementById("form");
+const form = document.getElementById("myForm");
 const add = document.getElementById("add-btn");
 
 
@@ -25,8 +25,16 @@ function Book(title, author, pages, read) {
   this.pages = pages;
   this.read = read;
   
+  
 };
 
+
+//      Test books for the basic constructor
+
+myLibrary.push(new Book("Lord Of The Hoes", "Jhonny Sins", 420, "read"));
+myLibrary.push(new Book("Two Piece", "Noel Miller", 1500, "unread"));
+
+addBookToLibrary()
 
 //      function that adds form data to myLibrary
 
@@ -51,13 +59,14 @@ function addedToBookList() {
   addedBooks.innerHTML = "";
 
   for (i = 0; i < myLibrary.length; i++) {
-    const card = `<div class="book-card" >
+    if (myLibrary[i].title !== "") {
+    const card = `<div class="book-card" data-index="${myLibrary[i].title}">
                     <div class="card">
                       <h2>${myLibrary[i].title}</h2>
                       <p>${myLibrary[i].author}</p>
                       <p>${myLibrary[i].pages}</p>
-                      <button onclick="readBtn(event)" id="read-btn" data-read="${myLibrary[i].title}">${myLibrary[i].read}</button>
-                      <button onclick="removeBtn(event)" data-index="${myLibrary[i].title}">Remove</button>
+                      <button class="readBtn" onclick="readBtn(event)">${myLibrary[i].read}</button>
+                      <button onclick="removeBtn(event)">Remove</button>
                     </div>
                   </div>`
        
@@ -65,6 +74,8 @@ function addedToBookList() {
     div.innerHTML = card;
     addedBooks.appendChild(div.firstChild);
 
+    }
+  
   };
 
 };
@@ -78,25 +89,23 @@ const submit = document.getElementById("submit");
 submit.addEventListener("click", (event) => { 
   event.preventDefault();
   addBookToLibrary();
+  form.reset()
+  
   
 });
 
 
 //     Event listener for remove button
 
-const remove = document.getElementById("remove");
+
 
 function removeBtn(event) {
-  const bookCard = document.querySelector(".book-card");
-  const arrIndex = event.target.getAttribute("data-index");
-
-  for (i=0; i < myLibrary.length; i++) {
-
-    if(myLibrary[i].title == arrIndex) {
-      bookCard.remove();
-      myLibrary.splice(myLibrary[i], 1)
-    }
-  }
+  
+  const arrIndex = event.target.parentNode.parentElement.getAttribute("data-index");
+  let newLibrary = myLibrary.filter(book => book.title !== arrIndex && book.title !== "")
+  
+  myLibrary = newLibrary
+  addBookToLibrary()
 };
 
 
@@ -107,51 +116,35 @@ function removeBtn(event) {
 
 
 function readBtn(event) {
-  
-  const unreadBtn = document.getElementById("read-btn");
-  let readStBtn = document.getElementById("read-btn").textContent;
-  const readIndex = event.target.getAttribute("data-read");
-  
 
-  for (i=0; i < myLibrary.length; i++) {
-    if (readStBtn == "read" || myLibrary[i].title == readIndex) {
-      readStBtn = "Unread";
-      unreadBtn.innerText = "Unread"
-      console.log(readIndex)
-      
-  
+  const readIndex = event.target.parentNode.parentElement.getAttribute("data-index");
+  let readTarget = event.target.textContent;
+
+  for(i=0; i < myLibrary.length; i++)  {
+
+    if (readTarget === "read" && readIndex === myLibrary[i].title) { 
+      myLibrary[i].read = "unread";  
+      addBookToLibrary() 
     } 
-    if (readStBtn == "Unread" || myLibrary[i].title == readIndex) {
-      readStBtn = "read";
-      unreadBtn.innerText = "read";
-      console.log(readIndex)
+      
+    if (readTarget === "unread" && readIndex === myLibrary[i].title) { 
+      myLibrary[i].read = "read";
+      addBookToLibrary()
     }
 
   }
-
- // if (readStBtn == "read" || ) {
- //   readStBtn = "Unread";
- //   unreadBtn.innerText = "Unread"
- //   console.log(readIndex);
-
-//    } 
-//    else if (readStBtn == "Unread") {
-//    readStBtn = "read";
-//    unreadBtn.innerText = "read";
-//    }
   
-
 }
 
 
 
 
-//      Test books for the basic constructor
 
-myLibrary.push(new Book("Lord Of The Hoes", "Jhonny Sins", 420, "read"));
-myLibrary.push(new Book("Smooth Criminal", "little Michael ", 423, "read "));
-myLibrary.push(new Book("Two Piece", "Noel Miller", 1500, "Unread"));
 
-addBookToLibrary()
+
+
+
+
+
 
 
