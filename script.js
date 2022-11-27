@@ -3,38 +3,47 @@
 const formField = document.querySelector(".form-container");
 const addedBooks = document.querySelector(".added-book");
 const form = document.getElementById("myForm");
-const add = document.getElementById("add-btn");
 
 
+//      AddEventListener for Add Book Button
+
+const addBtn = document.getElementById("add-btn");
+addBtn.addEventListener("click", (e) => {
+
+  
+
+  if (form.style.display == "none") {
+    addBtn.textContent = "Exit Form"
+    form.style.display = "block"
+  }
+  else if (form.style.display == "block") {
+    addBtn.textContent = "+ Add Book"
+    form.style.display = "none"
+  }
+  
+
+})
+  
+  
 
 
 //      Objects that hold form data
-
-const readVal = document.getElementById("read");
 
 let myLibrary = [];
 let newBook = '';
 
 
-
 //      Constructor for organizing the New Books
 
-function Book(title, author, pages, read) {
+function Book(title, author, pages, status) {
   this.title = title;
   this.author = author;
   this.pages = pages;
-  this.read = read;
-  
+  this.status = status;
+
   
 };
 
-
-//      Test books for the basic constructor
-
-myLibrary.push(new Book("Lord Of The Hoes", "Jhonny Sins", 420, "read"));
-myLibrary.push(new Book("Two Piece", "Noel Miller", 1500, "unread"));
-
-addBookToLibrary()
 
 //      function that adds form data to myLibrary
 
@@ -42,13 +51,11 @@ function addBookToLibrary() {
   const title = document.getElementById("title").value;
   const author = document.getElementById("author").value;
   const pages = document.getElementById("pages").value;
-  const read = document.getElementById("read").value;
-  newBook = new Book(title, author, pages, read);
+  const status = document.getElementById("status").value;
+  newBook = new Book(title, author, pages, status);
 
   myLibrary.push(newBook);
   addedToBookList(myLibrary);
-  
-  
 
 };
 
@@ -65,21 +72,22 @@ function addedToBookList() {
                       <h2>${myLibrary[i].title}</h2>
                       <p>${myLibrary[i].author}</p>
                       <p>${myLibrary[i].pages}</p>
-                      <button class="readBtn" onclick="readBtn(event)">${myLibrary[i].read}</button>
+                      <button class="readBtn" onclick="readBtn(event)">${myLibrary[i].status}</button>
                       <button onclick="removeBtn(event)">Remove</button>
                     </div>
                   </div>`
-       
+
+    
     const div = document.createElement("div");
     div.innerHTML = card;
     addedBooks.appendChild(div.firstChild);
+    
 
     }
-  
+    
   };
 
 };
-
 
 
 //      Event listener for Submiting Form
@@ -122,25 +130,27 @@ function readBtn(event) {
 
   for(i=0; i < myLibrary.length; i++)  {
 
-    if (readTarget === "read" && readIndex === myLibrary[i].title) { 
-      myLibrary[i].read = "unread";  
+    if (readTarget === "Read It" && readIndex === myLibrary[i].title) { 
+      myLibrary[i].status = "Not Read";
       addBookToLibrary() 
     } 
       
-    if (readTarget === "unread" && readIndex === myLibrary[i].title) { 
-      myLibrary[i].read = "read";
+    if (readTarget === "Not Read" && readIndex === myLibrary[i].title) { 
+      myLibrary[i].status = "Read It";
       addBookToLibrary()
     }
 
   }
-  
+
 }
 
 
+//      Test books for the basic constructor
 
+myLibrary.push(new Book("Lord Of The Hoes", "Jhonny Sins", 420, "Read It"));
+myLibrary.push(new Book("Two Piece", "Noel Miller", 1500, "Not Read"));
 
-
-
+addBookToLibrary()
 
 
 
