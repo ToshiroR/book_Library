@@ -22,8 +22,8 @@
 
   
 
-  <form action="" class="form-container" id="myForm">
-
+  <form action="" class="form-container" id="myForm" style="display:none;">
+    <h1 class="formTitle">Add A Book</h1>
     <div>
       <Label for="title">Title:</Label><br>
       <input type="text" id="title" name="title" required>
@@ -40,10 +40,10 @@
     </div>
 
     <div>
-      <input type="radio" id="read" name="read" value="read">
-      <Label for="read">read</Label>
-      <input type="radio" id="read" name="unread" value="unread">
-      <label for="unread">unread</label>
+      <input type="radio" id="status" name="Read It" value="Read It">
+      <Label for="status">Read It</Label>
+      <input type="radio" id="status" name="Not Read" value="Not Read">
+      <label for="status">Not Read</label>
     </div>
 
     <button type="submit" id="submit">Submit</button>
