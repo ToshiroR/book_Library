@@ -10,8 +10,6 @@ const form = document.getElementById("myForm");
 const addBtn = document.getElementById("add-btn");
 addBtn.addEventListener("click", (e) => {
 
-  
-
   if (form.style.display == "none") {
     addBtn.textContent = "Exit Form"
     form.style.display = "block"
@@ -21,12 +19,9 @@ addBtn.addEventListener("click", (e) => {
     form.style.display = "none"
   }
   
-
 })
   
   
-
-
 //      Objects that hold form data
 
 let myLibrary = [];
@@ -41,7 +36,6 @@ function Book(title, author, pages, status) {
   this.pages = pages;
   this.status = status;
 
-  
 };
 
 
@@ -82,11 +76,8 @@ function addedToBookList() {
     div.innerHTML = card;
     addedBooks.appendChild(div.firstChild);
     
-
-    }
-    
+    } 
   };
-
 };
 
 
@@ -99,12 +90,10 @@ submit.addEventListener("click", (event) => {
   addBookToLibrary();
   form.reset()
   
-  
 });
 
 
 //     Event listener for remove button
-
 
 
 function removeBtn(event) {
@@ -117,10 +106,7 @@ function removeBtn(event) {
 };
 
 
-
-
 //      Button for changing read Status
-
 
 
 function readBtn(event) {
@@ -134,14 +120,11 @@ function readBtn(event) {
       myLibrary[i].status = "Not Read";
       addBookToLibrary() 
     } 
-      
     if (readTarget === "Not Read" && readIndex === myLibrary[i].title) { 
       myLibrary[i].status = "Read It";
       addBookToLibrary()
     }
-
   }
-
 }
 
 
