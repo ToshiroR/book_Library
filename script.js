@@ -1,4 +1,4 @@
-//     objects that connect to
+//     objects that connect to the DOM
 
 const formField = document.querySelector(".form-container");
 const addedBooks = document.querySelector(".added-book");
@@ -13,10 +13,12 @@ addBtn.addEventListener("click", (e) => {
   if (form.style.display == "none") {
     addBtn.textContent = "Exit Form"
     form.style.display = "block"
+    addBtn.style.backgroundColor = "red"
   }
   else if (form.style.display == "block") {
     addBtn.textContent = "+ Add Book"
     form.style.display = "none"
+    addBtn.style.backgroundColor = "#00cf0a"
   }
   
 })
@@ -64,10 +66,10 @@ function addedToBookList() {
     const card = `<div class="book-card" data-index="${myLibrary[i].title}">
                     <div class="card">
                       <h2>${myLibrary[i].title}</h2>
-                      <p>${myLibrary[i].author}</p>
-                      <p>${myLibrary[i].pages}</p>
+                      <p>By ${myLibrary[i].author}</p>
+                      <p>${myLibrary[i].pages} Pages</p>
                       <button class="readBtn" onclick="readBtn(event)">${myLibrary[i].status}</button>
-                      <button onclick="removeBtn(event)">Remove</button>
+                      <button class="remove" onclick="removeBtn(event)">Remove</button>
                     </div>
                   </div>`
 
@@ -95,7 +97,6 @@ submit.addEventListener("click", (event) => {
 
 //     Event listener for remove button
 
-
 function removeBtn(event) {
   
   const arrIndex = event.target.parentNode.parentElement.getAttribute("data-index");
@@ -107,7 +108,6 @@ function removeBtn(event) {
 
 
 //      Button for changing read Status
-
 
 function readBtn(event) {
 
@@ -128,7 +128,7 @@ function readBtn(event) {
 }
 
 
-//      Test books for the basic constructor
+//      Test books 
 
 myLibrary.push(new Book("Lord Of The Hoes", "Jhonny Sins", 420, "Read It"));
 myLibrary.push(new Book("Two Piece", "Noel Miller", 1500, "Not Read"));
