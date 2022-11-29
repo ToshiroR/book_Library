@@ -5,6 +5,24 @@ const addedBooks = document.querySelector(".added-book");
 const form = document.getElementById("myForm");
 
 
+//    Form Validation and submit
+
+function validateForm() {
+  let x = document.forms["myForm"]["title"].value;
+  let y = document.forms["myForm"]["author"].value;
+  if (x == "") {
+    alert("Title must be filled out");
+    return false;
+  }
+  if (y == "") {
+    alert("Author must be filled out");
+    return false;
+  }
+  addBookToLibrary();
+  form.reset()
+}
+
+
 //      AddEventListener for Add Book Button
 
 const addBtn = document.getElementById("add-btn");
@@ -20,7 +38,6 @@ addBtn.addEventListener("click", (e) => {
     form.style.display = "none"
     addBtn.style.backgroundColor = "#00cf0a"
   }
-  
 })
   
   
@@ -37,7 +54,6 @@ function Book(title, author, pages, status) {
   this.author = author;
   this.pages = pages;
   this.status = status;
-
 };
 
 
@@ -52,7 +68,6 @@ function addBookToLibrary() {
 
   myLibrary.push(newBook);
   addedToBookList(myLibrary);
-
 };
 
 
@@ -77,22 +92,9 @@ function addedToBookList() {
     const div = document.createElement("div");
     div.innerHTML = card;
     addedBooks.appendChild(div.firstChild);
-    
     } 
   };
 };
-
-
-//      Event listener for Submiting Form
-
-const submit = document.getElementById("submit");
-
-submit.addEventListener("click", (event) => { 
-  event.preventDefault();
-  addBookToLibrary();
-  form.reset()
-  
-});
 
 
 //     Event listener for remove button

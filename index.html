@@ -22,7 +22,8 @@
 
   
 
-  <form action="" class="form-container" id="myForm" style="display:none;">
+  <form action="" class="form-container" id="myForm" name ="myForm" style="display:none;" >
+
     <h1 class="formTitle">Add A Book</h1>
     <div>
       <Label for="title">Title:</Label><br>
@@ -36,7 +37,7 @@
 
     <div>
       <Label for="pages">Number Of Pages:</Label>
-      <input type="text" id="pages" name="pages">
+      <input type="number" id="pages" name="pages">
     </div>
 
     <div>
@@ -46,7 +47,7 @@
       <label for="status">Not Read</label>
     </div>
 
-    <button type="submit" id="submit">Submit</button>
+    <button type="submit" id="submit" onclick="validateForm()">Submit</button>
 
 
   </form>
