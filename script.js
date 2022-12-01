@@ -21,8 +21,8 @@ function validateForm(event) {
     return false;
   }
   addBookToLibrary();
-  form.reset()
-}
+  form.reset();
+};
 
 
 //      AddEventListener for Add Book Button    //
@@ -40,7 +40,7 @@ addBtn.addEventListener("click", (e) => {
     form.style.display = "none"
     addBtn.style.backgroundColor = "#00cf0a"
   }
-})
+});
   
   
 //      Objects that hold form data   //
@@ -52,7 +52,7 @@ let newBook = '';
 //      Constructor for organizing the New Books  //
 
 function Book(title, author, pages, status) {
-  this.title = title;
+  this.title = title.toUpperCase();
   this.author = author;
   this.pages = pages;
   this.status = status;
@@ -74,7 +74,6 @@ function addBookToLibrary() {
   
     //    Local storage  //
     localStorage.setItem("books", JSON.stringify(myLibrary));
-    
 };
 
 
@@ -95,7 +94,6 @@ function addedToBookList() {
                     </div>
                   </div>`
 
-    
     const div = document.createElement("div");
     div.innerHTML = card;
     addedBooks.appendChild(div.firstChild);
@@ -127,20 +125,33 @@ function readBtn(event) {
 
     if (readTarget === "Read It" && readIndex === myLibrary[i].title) { 
       myLibrary[i].status = "Not Read";
-      addBookToLibrary() 
+      event.target.textContent = "Not Read"
+      localStorage.setItem("books", JSON.stringify(myLibrary));
     } 
     if (readTarget === "Not Read" && readIndex === myLibrary[i].title) { 
       myLibrary[i].status = "Read It";
-      addBookToLibrary()
+      event.target.textContent = "Read It"
+      localStorage.setItem("books", JSON.stringify(myLibrary));
     }
   }
 }
 
 
-//      Test books 
+//    RemoveAll button    //
 
+const removeAll = document.getElementById("removeAll");
 
-addedToBookList()
+removeAll.addEventListener("click", (e) => {
+  
+  if (confirm("Delete all Books?")) {
+    window.localStorage.clear()
+    window.location.reload()
+  } else {
+    return false
+  }
+});
+
+addedToBookList();
 
 
 

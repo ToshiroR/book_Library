@@ -6,55 +6,60 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
   <link rel="stylesheet" href="style.css">
-  <title>JavaScript practice</title>
+  <title>Book Library</title>
 </head>
 
 <body>
 
+<!--    Header    -->
   <header>
     <h1 class=hTitle>Book Library</h1>
+    <button id="removeAll" class="remove">Remove All</button>
   </header>
 
+<!--    summon the form button   -->
   <section class="add_button">
     <button class="addBook" id="add-btn"> + Add Book</button>
-
   </section>
 
-  
-
+  <!--    Form    -->
   <form action="" class="form-container" id="myForm" name ="myForm" style="display:none;" >
 
     <h1 class="formTitle">Add A Book</h1>
     <div>
       <Label for="title">Title:</Label><br>
-      <input type="text" id="title" name="title">
+      <input type="text" id="title" name="title" placeholder="The Call of Cthulhu">
     </div>
 
     <div>
       <Label for="author">Author:</Label>
-      <input type="text" id="author" name="author">
+      <input type="text" id="author" name="author" placeholder="H.P. Lovecraft">
     </div>
 
     <div>
       <Label for="pages">Number Of Pages:</Label>
-      <input type="number" id="pages" name="pages">
+      <input type="number" id="pages" name="pages" placeholder="420">
     </div>
 
     <div>
-      <input type="radio" id="status" name="Read It" value="Read It">
-      <Label for="status">Read It</Label>
-      <input type="radio" id="status" name="Not Read" value="Not Read">
-      <label for="status">Not Read</label>
+      <Label for="status">Read Status: </Label>
+      <select name="status" id="status">
+        <option value="Read It">Read it</option>
+        <option value="Not Read">Not Read</option>
+      </select>
     </div>
 
+<!--    Submit Button   -->
     <button type="submit" id="submit" onclick="validateForm(event)">Submit</button>
   </form>
 
+  <!--    container to hold Book Cards    -->
   <section class="book-container">
-    <div class="added-book" id="books"></div>
+    <div class="added-book" id="books">
+    </div>
   </section>
 
-
+<!--    Javascript    -->
   <script src="script.js"></script>
 </body>
 </html>
