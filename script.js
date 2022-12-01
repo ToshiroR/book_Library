@@ -1,13 +1,15 @@
-//     objects that connect to the DOM
+//     objects that connect to the DOM    //
 
 const formField = document.querySelector(".form-container");
 const addedBooks = document.querySelector(".added-book");
 const form = document.getElementById("myForm");
 
 
-//    Form Validation and submit
 
-function validateForm() {
+//    Form Validation and submit    //
+
+function validateForm(event) {
+  event.preventDefault()
   let x = document.forms["myForm"]["title"].value;
   let y = document.forms["myForm"]["author"].value;
   if (x == "") {
@@ -23,7 +25,7 @@ function validateForm() {
 }
 
 
-//      AddEventListener for Add Book Button
+//      AddEventListener for Add Book Button    //
 
 const addBtn = document.getElementById("add-btn");
 addBtn.addEventListener("click", (e) => {
@@ -41,13 +43,13 @@ addBtn.addEventListener("click", (e) => {
 })
   
   
-//      Objects that hold form data
+//      Objects that hold form data   //
 
-let myLibrary = [];
+let myLibrary = JSON.parse(localStorage.getItem("books")) || [];
 let newBook = '';
 
 
-//      Constructor for organizing the New Books
+//      Constructor for organizing the New Books  //
 
 function Book(title, author, pages, status) {
   this.title = title;
@@ -57,7 +59,7 @@ function Book(title, author, pages, status) {
 };
 
 
-//      function that adds form data to myLibrary
+//      function that adds form data to myLibrary   //
 
 function addBookToLibrary() {
   const title = document.getElementById("title").value;
@@ -66,12 +68,17 @@ function addBookToLibrary() {
   const status = document.getElementById("status").value;
   newBook = new Book(title, author, pages, status);
 
-  myLibrary.push(newBook);
-  addedToBookList(myLibrary);
+  
+    myLibrary.push(newBook);
+    addedToBookList(myLibrary);
+  
+    //    Local storage  //
+    localStorage.setItem("books", JSON.stringify(myLibrary));
+    
 };
 
 
-//      function for creating Book card on the Dom
+//      function for creating Book card on the Dom    //
 
 function addedToBookList() {
   addedBooks.innerHTML = "";
@@ -97,7 +104,7 @@ function addedToBookList() {
 };
 
 
-//     Event listener for remove button
+//     Event listener for remove button   //
 
 function removeBtn(event) {
   
@@ -109,7 +116,7 @@ function removeBtn(event) {
 };
 
 
-//      Button for changing read Status
+//      Button for changing read Status   //
 
 function readBtn(event) {
 
@@ -132,13 +139,8 @@ function readBtn(event) {
 
 //      Test books 
 
-myLibrary.push(new Book("Lord Of The Hoes", "Jhonny Sins", 420, "Read It"));
-myLibrary.push(new Book("Two Piece", "Noel Miller", 1500, "Not Read"));
 
-addBookToLibrary()
-
-
-
+addedToBookList()
 
 
 

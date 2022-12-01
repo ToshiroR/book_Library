@@ -27,12 +27,12 @@
     <h1 class="formTitle">Add A Book</h1>
     <div>
       <Label for="title">Title:</Label><br>
-      <input type="text" id="title" name="title" required>
+      <input type="text" id="title" name="title">
     </div>
 
     <div>
       <Label for="author">Author:</Label>
-      <input type="text" id="author" name="author" required>
+      <input type="text" id="author" name="author">
     </div>
 
     <div>
@@ -47,19 +47,12 @@
       <label for="status">Not Read</label>
     </div>
 
-    <button type="submit" id="submit" onclick="validateForm()">Submit</button>
-
-
+    <button type="submit" id="submit" onclick="validateForm(event)">Submit</button>
   </form>
 
-  
   <section class="book-container">
-
     <div class="added-book" id="books"></div>
-    
-
   </section>
-
 
 
   <script src="script.js"></script>
